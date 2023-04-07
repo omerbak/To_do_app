@@ -16,7 +16,7 @@ body{
 }
 .container {
     width: 600px;
-    margin: 80px auto;
+    margin: 30px auto;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -133,37 +133,146 @@ body{
     content: "\f00c";
     color: white;
 }
-.task .delete {
-    display: block;
+
+.task .options-box {
+    display: flex;
     background-color: transparent;
     padding: 5px;
     border: 2px solid transparent;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.5s;
+   
     text-decoration: none;
+}
+.options-box div{
     width: 30px;
     height: 30px;
     /* margin-left: 5px; */
     display: grid;
     place-items: center;
     font-size: 16px;
+    border-radius: 50%;
+    transition: 0.5s;
+    cursor: pointer;
 }
-.task.done .delete i{
+.task.done .options-box i{
     text-decoration: none;
 }
-.delete:hover {
+.options-box .delete-option:hover {
     background-color: rgb(238, 63, 0);
     color: white;
 }
-
+.options-box .edit-option:hover {
+    background-color: rgb(112, 172, 0);
+    color: white;
+}
 .text {
     max-width: 80%;
     overflow-wrap: break-word;
 }
-
+.edit-page{
+    display: none;
+}
+.edit-page.active{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(64, 54, 58, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.edit-page form{
+    width: 100%;
+}
+.form :is(.edit-btn, .cancel-btn){
+    width: 70px;
+    padding: 7px 0;
+    background-color: var(--primary);
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.form :is(.edit-btn, .cancel-btn):hover{
+    transform: scale(1.1);
+}
+.form .cancel-btn{
+    background-color: #90ACB8;
+}
 @media (max-width: 700px) {
     .container  {
         width: 450px;
     }
+}
+
+/* copyrights */
+
+.copyrights{
+    display: flex;
+    background-color: var(--primary);
+    /* width: 130px; */
+    padding: 5px;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s;
+    overflow: hidden;
+    margin: 0 auto 70px auto;
+    width: 250px;
+    justify-content: center;
+}
+.copyrights .text{
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.copyrights .text span{
+    color: white;
+    font-weight: 700;
+}
+
+.copyrights .icons{
+    overflow: hidden;
+    width: 0;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: white;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: var(--background-color);
+    border-radius: 5px;
+}
+.copyrights .icons a {
+    text-decoration: none;
+}
+.copyrights .icons a i {
+    color: black;
+    font-size: 24px;
+    transition: color 0.3s;
+}
+.copyrights .icons a i:hover {
+    color:var(--primary);
+} 
+.copyrights::before {
+    content: "";
+    width: 10px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: white;
+    border-radius: 5px 0 0 5px;
+}
+
+.copyrights:hover .icons {
+    width: 100%;
 }

@@ -17,9 +17,16 @@
     <title>To Do List</title>
 </head>
 <body>
-    
     <div class="container">
-        <form class="form">
+        <div class="copyrights">
+            <div class="icons">
+                <a href="https://twitter.com/Ooo_bak" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                <a href="https://github.com/omerbak?tab=repositories" target="_blank"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <p class="text">Developed by <span>Omer Baktheer</span></p>
+        </div>
+        
+        <form class="form add-form">
             <input type="text" class="input">
             <button type="submit" class="add">Add Task</button>
         </form>
@@ -31,10 +38,19 @@
             </ul>
         </nav>
         <div class="tasks">
-            
+        </div>
+
+        <div class="edit-page">
+            <div class="container">
+                <form class="form edit-form">
+                    <input name="text" type="text" class="input">
+                    <button type="submit" class="edit-btn">Edit Task</button>
+                    <button class="cancel-btn">Cancel</button>
+                </form>
+            </div>
         </div>
     </div>
-
+   
     <script src="./main.js"></script>
 </body>
 </html>
