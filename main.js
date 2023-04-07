@@ -10,14 +10,14 @@ let arrayTasks = [];
 //task id for the task to edit
 let taskId;
 let taskToEdit;
+
+
 //check if there is tasks in local storage
 if(localStorage.getItem("tasks")){
     arrayTasks = JSON.parse(localStorage.getItem("tasks"));
     //Trigger getDataFromLocal
     getDataFromLocal()
 }
-
-
 
 // add task to array when the form is submitted
 addForm.addEventListener("submit", (e) => {
@@ -32,17 +32,17 @@ addForm.addEventListener("submit", (e) => {
 editForm.addEventListener("submit", (e) => {
     e.preventDefault();
     let editFormText = editForm.text.value;
-    editTasksArray(taskId, editFormText)
-    editPage.classList.remove("active")
-    console.log(editForm.text.value)
-    console.log(taskId)
+    if(editFormText !== ""){
+        editTasksArray(taskId, editFormText)
+        editPage.classList.remove("active")
+        console.log(editForm.text.value)
+        console.log(taskId)
+    }
 })
-// Delete task fonctionality
-/* deleteOptions.forEach(item => {
-    item.addEventListener('click', (e) => {
-        item.parentElement.remove()
-    })
-}) */
+// close edit form
+cancelEditForm.addEventListener("click", () => {
+    editPage.classList.remove("active")
+})
 
 //Click on task element (delete, edit and commpleted task fonctionality)
 tasksDiv.addEventListener("click", (e) => {
@@ -65,25 +65,19 @@ tasksDiv.addEventListener("click", (e) => {
         //Remove task from local storage
         taskId = e.target.parentElement.parentElement.getAttribute("data-id");
         taskToEdit = arrayTasks.find((task) =>  taskId == task.id)
-        console.log("task id",taskId)
+        /* console.log("task id",taskId)
         console.log("tasks array",arrayTasks)
-        console.log("task to edit", taskToEdit)
+        console.log("task to edit", taskToEdit) */
         editForm.text.value = taskToEdit.title
-       //Remove element from page
-       // e.target.parentElement.parentElement.remove();
-       
     } else if(e.target.parentElement.classList.contains("edit-option")) {
         editPage.classList.add("active")
          //Remove task from local storage
-         taskId = e.target.parentElement.parentElement.parentElement.getAttribute("data-id");
-         taskToEdit = arrayTasks.find((task) =>  taskId == task.id)
-        console.log("task id",taskId)
+        taskId = e.target.parentElement.parentElement.parentElement.getAttribute("data-id");
+        taskToEdit = arrayTasks.find((task) =>  taskId == task.id)
+        /* console.log("task id",taskId)
         console.log("tasks array",arrayTasks)
-        console.log("task to edit", taskToEdit)
+        console.log("task to edit", taskToEdit) */
         editForm.text.value = taskToEdit.title;
-         //Remove element from page
-         //e.target.parentElement.parentElement.parentElement.remove();
-        
     }
 
     //check Task element
@@ -236,110 +230,6 @@ function filterTasks(filter){
     console.log(arrayTasks); */
 }
 
-// close edit form
-cancelEditForm.addEventListener("click", () => {
-    editPage.classList.remove("active")
-})
-
-
-/* let localTasks = [];
-
-let id = 0;
-
-
-//check if there are tasks stored in the local stiorage 
-if(JSON.parse(window.localStorage.getItem("localStorageTasks"))){
-    localTasks = JSON.parse(window.localStorage.getItem("localStorageTasks")); 
-    let end = localTasks.length ;
-    for(let i = 0; i < end; i++){  //show the tasks already registred in local storage
-        let task =  createTask(localTasks[i]["text"])
-        task.setAttribute("data-id", localTasks[i]["id"]);
-        tasks.appendChild(task);
-   }
-   id = localTasks.length;
-   console.log(id)
-}
-
-
-// to add task created by the createTask() function to the tasks div 
-add.addEventListener("click", () => {
-    if(input.value !== ""){    //add task if in input is not empty
-        let task = createTask(input.value);
-        task.setAttribute("data-id", id);
-        tasks.appendChild(task);
-    
-        input.value = "";
-        let storeTask = {
-        id : id,
-        text: task.firstChild.textContent,
-        done : false 
-        }
-         localTasks.push(storeTask);
-        id++
-        window.localStorage.setItem("localStorageTasks" , JSON.stringify(localTasks))
-        console.log(JSON.parse(window.localStorage.getItem("localStorageTasks")));
-    }
-   
-})
 
 
 
-// To delete task when the delete button clicked
-document.addEventListener('click', (e) => {
-    if(e.target.classList.contains("delete")){
-        let idTask = e.target.parentElement.dataset["id"]; //get the id of the task to remove from the [data-id]
-        let indexTaskToRemove ;
-        for (let i = 0; i<  localTasks.length; i++) { //get the index of task in localTask array
-            if(localTasks[i].id === idTask){
-                indexTaskToRemove = i;
-            }
-        }
-        localTasks.splice(indexTaskToRemove,1); //remove the task from the array
-        
-        window.localStorage.setItem("localStorageTasks" , JSON.stringify(localTasks)) //update the values in local storage
-        e.target.parentElement.style.opacity = "0";
-        setTimeout(() => {
-            e.target.parentElement.remove(); 
-        }, 300) 
-        
-    }
-
-})
-
-// return a task object whihle taking the input of the task in parameter
-function createTask (inputText) {
-   
-   let task = document.createElement("div");
-   task.classList.add("task");
-   let dBtn = document.createElement("button");
-   dBtn.textContent = "Delete";
-   dBtn.classList.add("delete");
-   let taskText = document.createElement("div");
-   taskText.classList.add("text");
-   taskText.textContent = inputText; 
-   task.appendChild(taskText);
-   task.appendChild(dBtn);
-   return task;
-}
-
-
-//Adding the done fonctionallity
-
-tasks.addEventListener("click", (e) => {
-
-    if(e.target.classList.contains("task")){
-        e.target.classList.toggle("done");
-        
-        
-    }
-    
-})
-
-
-function getObject(wantedId, arr){
-    arr.forEach((item) => {
-        if(item.id === wantedId){
-            return item;
-        }
-    })
-} */
